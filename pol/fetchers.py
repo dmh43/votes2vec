@@ -12,9 +12,10 @@ def get_votes_by_bill(leg_id_to_pol_id,
     leg_ids_to_votes = bill_info['votes']
     vote_for, vote_against, vote_abstain = set(), set(), set()
     for leg_id, vote in leg_ids_to_votes.items():
+      if leg_id not in leg_id_to_pol_id: continue
       if vote == 'yes': vote_for.add(leg_id_to_pol_id[leg_id])
       elif vote == 'no': vote_against.add(leg_id_to_pol_id[leg_id])
-      elif vote == 'other': vote_abstain.add(leg_id_to_pol_id[leg_id])
+      else: vote_abstain.add(leg_id_to_pol_id[leg_id])
     return {'for': vote_for, 'against': vote_against, 'abstain': vote_abstain}
   with open(state_votes_path) as fh:
     votes = json.load(fh)
