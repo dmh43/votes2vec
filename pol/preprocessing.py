@@ -8,7 +8,7 @@ from spacy.language import Language
 import pydash as _
 
 def _match(vals, query, score_fn):
-  max_score, max_idx = max(((i, score_fn(query, val))
+  max_idx, max_score = max(((i, score_fn(query, val))
                             for i, val in enumerate(vals)),
                            key=itemgetter(1))
   return vals[max_idx]
