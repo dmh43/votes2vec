@@ -38,4 +38,4 @@ def get_leg_id_to_pol_id(lookup_path='data/comp_ling_politicians_sorted_with_glo
   return dict(pd.read_csv(lookup_path)[['leg_id', 'pol_id']].values.tolist())
 
 def get_pol_names(lookup_path='data/comp_ling_politicians_sorted_with_globals_and_meta.csv') -> List[str]:
-  return pd.read_csv(lookup_path).names.tolist()
+  return pd.read_csv(lookup_path).name.tolist()
