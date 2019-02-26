@@ -34,4 +34,4 @@ def to_sentences(nlp: Language, documents: List[str]):
 
 def get_pol_name_to_flag(pol_names: List[str]):
   def _pol_flag(pol_name): return sub('[^a-zA-Z]', '_', _.to_upper(pol_name)) + '_FLAG'
-  return [_pol_flag(name) for name in pol_names]
+  return {name: _pol_flag(name) for name in pol_names}
