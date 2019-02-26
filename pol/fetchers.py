@@ -6,14 +6,15 @@ from collections import defaultdict
 from typing import List, Dict, Set, Tuple
 import json
 
-def get_votes_by_bill(state_votes_path='data/statehvotes.json') -> Dict[str, Dict[str, Set[int]]]:
+def get_votes_by_bill(leg_id_to_pol_id,
+                      state_votes_path='data/statehvotes.json') -> Dict[str, Dict[str, Set[int]]]:
   def _split_for_against_abstain(bill_info):
     leg_ids_to_votes = bill_info['votes']
     vote_for, vote_against, vote_abstain = set(), set(), set()
     for leg_id, vote in leg_ids_to_votes.items():
-      if vote == 'yes': vote_for.add(leg_id)
-      elif vote == 'no': vote_against.add(leg_id)
-      elif vote == 'other': vote_abstain.add(leg_id)
+      if vote == 'yes': vote_for.add(leg_id_to_pol_id[leg_id])
+      elif vote == 'no': vote_against.add(leg_id_to_pol_id[leg_id])
+      elif vote == 'other': vote_abstain.add(leg_id_to_pol_id[leg_id])
     return {'for': vote_for, 'against': vote_against, 'abstain': vote_abstain}
   votes = json.load(state_votes_path)
   return _.map_values(votes, _split_for_against_abstain)
