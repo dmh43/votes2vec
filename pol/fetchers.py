@@ -32,7 +32,7 @@ def extract_documents(article_dir_path='data/article_jsons/') -> Tuple[List[str]
   return documents, dict(doc_ids_by_pol_id)
 
 def get_leg_id_to_pol_id(lookup_path='data/comp_ling_politicians_sorted_with_globals_and_meta.csv') -> Dict[str, int]:
-  return dict(pd.read_csv(lookup_path)[['leg_id', 'pol_id']].tolist())
+  return dict(pd.read_csv(lookup_path)[['leg_id', 'pol_id']].values.tolist())
 
 def get_pol_names(lookup_path='data/comp_ling_politicians_sorted_with_globals_and_meta.csv') -> List[str]:
   return pd.read_csv(lookup_path).names.tolist()
