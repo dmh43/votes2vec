@@ -16,7 +16,8 @@ def get_votes_by_bill(leg_id_to_pol_id,
       elif vote == 'no': vote_against.add(leg_id_to_pol_id[leg_id])
       elif vote == 'other': vote_abstain.add(leg_id_to_pol_id[leg_id])
     return {'for': vote_for, 'against': vote_against, 'abstain': vote_abstain}
-  votes = json.load(state_votes_path)
+  with open(state_votes_path) as fh:
+    votes = json.load(fh)
   return _.map_values(votes, _split_for_against_abstain)
 
 def extract_documents(article_dir_path='data/article_jsons/') -> Tuple[List[str], Dict[int, List[int]]]:
