@@ -22,10 +22,10 @@ def flag_docs(nlp: Language,
     flagged = ''
     so_far = 0
     for entity in nlp(doc).ents:
-      if entity['label_'] != 'PERSON': continue
-      flagged += doc[so_far : entity['start']]
-      flagged += pol_name_to_flag[_match(pol_names, entity['text'], sim)]
-      so_far = entity['end'] + 1
+      if entity.label_ != 'PERSON': continue
+      flagged += doc[so_far : entity.start]
+      flagged += pol_name_to_flag[_match(pol_names, entity.text, sim)]
+      so_far = entity.end + 1
     flagged_docs.append(flagged)
   return flagged_docs
 
