@@ -23,14 +23,14 @@ def flag_docs(nlp: Language,
     so_far = 0
     for entity in nlp(doc).ents:
       if entity.label_ != 'PERSON': continue
-      flagged += doc[so_far : entity.start]
+      flagged += doc[so_far : entity.start_char]
       flagged += pol_name_to_flag[_match(pol_names, entity.text, sim)]
-      so_far = entity.end + 1
+      so_far = entity.end_char + 1
     flagged_docs.append(flagged)
   return flagged_docs
 
 def to_sentences(nlp: Language, documents: List[str]):
-  return [nlp(doc).sents for doc in documents]
+  return [list(nlp(doc).sents) for doc in documents]
 
 def get_pol_name_to_flag(pol_names: List[str]):
   def _pol_flag(pol_name): return sub('[^a-zA-Z]', '_', _.to_upper(pol_name)) + '_FLAG'
