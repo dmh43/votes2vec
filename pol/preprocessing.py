@@ -23,6 +23,7 @@ def flag_docs(nlp: Language,
     so_far = 0
     for entity in nlp(doc).ents:
       if entity.label_ != 'PERSON': continue
+      if sim(pol_names, entity.text) < 0.5: continue
       flagged += doc[so_far : entity.start_char]
       flagged += pol_name_to_flag[_match(pol_names, entity.text, sim)]
       so_far = entity.end_char + 1
