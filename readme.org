@@ -1,0 +1,4 @@
+* pol2vec
+- Runs NER and replaces each mention of any state representative with their specific token (${NAME}_FLAG)
+- Trains word2vec on this new corpus
+- Uses the learned word vectors to assess state representative similarity
