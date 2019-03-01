@@ -27,6 +27,7 @@ def flag_docs(nlp: Language,
       flagged += doc[so_far : entity.start_char]
       flagged += pol_name_to_flag[_match(pol_names, entity.text, sim)]
       so_far = entity.end_char + 1
+    flagged += doc[so_far : -1]
     flagged_docs.append(flagged)
   return flagged_docs
 
